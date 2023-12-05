@@ -43,9 +43,11 @@ public class TestProcessor {
             }
         }
 
-        for (int order : testMethods.keySet().stream().sorted().toList()) {
-            testMethods.get(order).forEach(it -> runTest(it, testObj, beforeEachMethods, afterEachMethods));
-        }
+        testMethods.keySet().stream()
+                .sorted()
+                .forEachOrdered(it ->
+                        testMethods.get(it).forEach(method ->
+                                runTest(method, testObj, beforeEachMethods, afterEachMethods)));
     }
 
     private static void checkMethod(Method method) {
